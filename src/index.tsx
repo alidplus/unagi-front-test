@@ -5,6 +5,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Collection } from './pages/Collection';
 import { CreateCard } from './pages/CreateCard';
 
+import './reset.css'
+import './index.css'
+
 const App = () => (
   <Router>
     <Switch>

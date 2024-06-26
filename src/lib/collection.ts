@@ -1,4 +1,6 @@
-export const fetchCollection = () => {
+import { TCollection } from "../types";
+
+export const fetchCollection = (): TCollection => {
   /**
    * Step 2: Instead of directly returning the collection, fetch it from http://localhost:8001/cards
    */

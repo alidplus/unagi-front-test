@@ -1,0 +1,35 @@
+.collection {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px #6a6a6aa3;
+  transition: transform 100ms;
+  will-change: transform;
+  overflow: hidden
+}
+
+.card:hover {
+  transform: scale(1.04);
+}
+
+.card .card-title {
+  text-align: center;
+  margin: 10px 0
+}
+
+.card .card-content {
+}
+
+.card .card-tag {
+  background-color: #FCB300;
+  padding: 5px;
+  border-radius: 2px;
+}
