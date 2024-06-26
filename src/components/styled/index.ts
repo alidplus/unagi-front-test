@@ -4,3 +4,4 @@ export * from './Box';
 export * from './Card';
 export * from './Loading';
 export * from './Buttons';
+export * from './ControlBar';

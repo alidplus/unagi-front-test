@@ -21,6 +21,15 @@ export const Input = styled(Field)((props) => ({
   padding: props.theme.space.md,
 }));
 
+export const Radio = styled.input(
+  (props) => ({
+    border: props.theme.border.sm,
+    borderRadius: props.theme.radius.sm,
+    padding: props.theme.space.md,
+  }),
+  { type: 'radio ' }
+);
+
 export const Label = styled.label((props) => ({
   fontWeight: 'bold',
 }));
