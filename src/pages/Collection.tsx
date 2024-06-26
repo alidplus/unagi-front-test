@@ -1,55 +1,39 @@
 import { useEffect, useState } from 'react';
 
-import { fetchCollection } from '../lib/collection';
-
-import { getCardImage } from '../lib/url';
+import PlayerCard from '../components/PlayerCard';
+import { Box, Loading } from '../components/styled';
 import { TCollection } from '../types';
-import './Collection.css';
-import { formatDate } from '../lib/formatter';
-import { LazyImage } from '../components/LazyImage';
+import { fetchCards, isSuccessFetchCards } from '../lib/api';
+import { ErrorMessage } from '../components/styled/Message';
 
 export const Collection = () => {
-  const [collection, setCollection] = useState<TCollection>([])
+  const [error, setError] = useState<string | undefined>();
+  const [loading, setLoading] = useState(true);
+  const [collection, setCollection] = useState<TCollection>([]);
 
   useEffect(() => {
-    // fetch data
-    const data = fetchCollection();
-
-    // normalize data
-    const collection = data.map(card => ({
-      ...card,
-      player: {
-        ...card.player,
-        image: getCardImage(card)
+    async function asyncFetch() {
+      const res = await fetchCards();
+      if (isSuccessFetchCards(res)) {
+        setCollection(res.cards);
+      } else {
+        setError(res.error);
       }
-    }))
-
-    // set collection
-    setCollection(collection)
-  }, [])
+      setLoading(false);
+    }
+    asyncFetch();
+  }, []);
 
   /**
    * Step 1: Render the card
    */
+  if (loading) return <Loading />;
+  if (error) return <ErrorMessage>{error}</ErrorMessage>;
   return (
-    <div className='collection'>
-      {collection.map(card => {
-        const player = card.player,
-          fullName = `${player.firstname} ${player.lastname}`,
-          dob = formatDate(player.birthday)
-          
-        return (
-          <div className='card' key={card.id}>
-            <div className="aspect-ratio">
-              <LazyImage className='card-image' src={card.player.image} alt={fullName}  />
-            </div>
-            <h1 className='card-title'>{fullName}</h1>
-            <div className='card-content'>
-              <span className='card-tag'>DOB: {dob}</span>
-            </div>
-          </div>
-        )
-      })}
-    </div>
-  )
+    <Box align="center" padding="md">
+      {collection.map((card) => (
+        <PlayerCard key={card.id} card={card} />
+      ))}
+    </Box>
+  );
 };

@@ -1,32 +1,62 @@
+import { createGlobalStyle } from 'styled-components';
+
+export const ResetCSS = createGlobalStyle`
+  *, *::before, *::after{
+    box-sizing: border-box; 
+  }
+
+  *{
+    margin: 0; 
+    padding: 0; 
+  }
+
+  ul[role='list'], ol[role='list']{
+    list-style: none; 
+  }
+
+  html:focus-within{
+    scroll-behavior: smooth; 
+  }
+
+  a:not([class]){
+    text-decoration-skip-ink: auto; 
+  }
+
+  img, picture, svg, video, canvas{
+    max-width: 100%;
+    height: auto; 
+    vertical-align: middle; 
+    font-style: italic; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+  }
+
+  input, button, textarea, select{
+    font: inherit; 
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html:focus-within {
+        scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+        transition: none;
+    }
+  }
+
+  body, html{
+    height: 100%; 
+    scroll-behavior: smooth; 
+  }
+`;
+
+export const GlobalCss = createGlobalStyle`
 body {
-  background-color: #eee;
-}
-.aspect-ratio {
-  position: relative;
-  padding-bottom: 100%;
-}
-
-.aspect-ratio.r-3x4 {
-  padding-bottom: 133%;
-}
-
-.aspect-ratio.r-4x3 {
-  padding-bottom: 75%;
-}
-
-.aspect-ratio>*{
-  position: absolute!important;
-  width: 100%;
-  height: 100%;
-  inset: 0;
-}
-
-.aspect-ratio>*:not(img){
-  margin: auto;
-}
-
-.aspect-ratio>img{
-  object-fit: contain;
+  background-color: ${(props) => props.theme.palette.body}
 }
 
 .lds-default {
@@ -119,3 +149,4 @@ body {
     transform: scale(1.5);
   }
 }
+`;

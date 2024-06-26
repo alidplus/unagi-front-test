@@ -1,20 +1,24 @@
-import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { Collection } from './pages/Collection';
 import { CreateCard } from './pages/CreateCard';
 
-import './reset.css'
-import './index.css'
+import { ThemeProvider } from 'styled-components';
+import { GlobalCss, ResetCSS } from './components/styled/global';
+import { theme } from './components/styled/theme';
 
 const App = () => (
-  <Router>
-    <Switch>
-      <Route exact path="/collection" component={Collection} />
-      <Route exact path="/create-card" component={CreateCard} />
-    </Switch>
-  </Router>
+  <ThemeProvider theme={theme}>
+    <ResetCSS />
+    <GlobalCss />
+    <Router>
+      <Switch>
+        <Route exact path="/collection" component={Collection} />
+        <Route exact path="/create-card" component={CreateCard} />
+      </Switch>
+    </Router>
+  </ThemeProvider>
 );
 
 render(<App />, document.getElementById('root'));
