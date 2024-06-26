@@ -149,4 +149,33 @@ body {
     transform: scale(1.5);
   }
 }
+
+.aspect-ratio {
+  width: 100%;
+  position: relative;
+  padding-bottom: 100%;
+}
+
+.aspect-ratio.r-3x4 {
+  padding-bottom: 133%;
+}
+
+.aspect-ratio.r-4x3 {
+  padding-bottom: 75%;
+}
+
+.aspect-ratio>*{
+  position: absolute!important;
+  inset: 0;
+}
+
+.aspect-ratio>*:not(img){
+  margin: auto;
+}
+
+.aspect-ratio>img{
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
 `;

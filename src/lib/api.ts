@@ -1,4 +1,4 @@
-import { TCollection } from '../types';
+import { TCard, TCollection, TPlayer } from '../types';
 import { API_BASE } from '../constants';
 import { getCardImage } from './url';
 import { getErrorMessage } from './errors';
@@ -36,4 +36,40 @@ export function isSuccessFetchCards(
   res: SuccessFetchCards | FailedFetchCards
 ): res is SuccessFetchCards {
   return !!('cards' in res);
+}
+
+interface SuccessSaveCard {
+  player: TPlayer;
+}
+
+interface FailedSaveCard {
+  error: string;
+}
+
+export async function saveCard(
+  data: TPlayer
+): Promise<SuccessSaveCard | FailedSaveCard> {
+  try {
+    const res = await fetch(API_BASE + '/cards', {
+      body: JSON.stringify({ player: data }),
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+    const card: TCard = await res.json();
+
+    console.log({ card });
+
+    return card;
+  } catch (e: unknown) {
+    return { error: getErrorMessage(e) };
+  }
+}
+
+export function isSuccessSaveCard(
+  res: SuccessSaveCard | FailedSaveCard
+): res is SuccessSaveCard {
+  return !!('player' in res);
 }

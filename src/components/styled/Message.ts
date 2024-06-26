@@ -2,10 +2,14 @@ import styled from 'styled-components';
 import { Box } from './Box';
 import { TSizes } from './theme';
 
-export const ErrorMessage = styled(Box)((props) => ({
-  padding: props.theme.space.lg,
+interface ErrorMessageStyles {
+  inline?: boolean;
+}
+
+export const ErrorMessage = styled(Box)<ErrorMessageStyles>((props) => ({
+  padding: props.inline ? props.theme.space.sm : props.theme.space.lg,
   color: props.theme.palette.secondary,
   borderRadius: props.theme.radius.sm,
-  border: props.theme.border.sm,
+  border: !props.inline ? props.theme.border.sm : undefined,
   borderColor: props.theme.palette.secondary,
 }));

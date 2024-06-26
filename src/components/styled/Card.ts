@@ -16,6 +16,7 @@ export const Card = styled(Box)<CardStyles>((props) => [
     border: props.theme.border[props.border],
     borderRadius: props.theme.radius[props.round ?? 'sm'],
     overflow: 'hidden',
+    width: 300,
   },
   props.hoverable
     ? {

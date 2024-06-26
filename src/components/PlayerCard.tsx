@@ -23,7 +23,7 @@ export function RenderPlayerCard({ card }: RenderPlayerCardProps) {
   }, [card]);
 
   return (
-    <Card hoverable>
+    <Card align="center" hoverable>
       <div className="aspect-ratio">
         <LazyImage className="card-image" src={imageUrl} alt={fullName} />
       </div>

@@ -14,6 +14,8 @@ export const Collection = () => {
   useEffect(() => {
     async function asyncFetch() {
       const res = await fetchCards();
+      console.log('rrr', { res });
+
       if (isSuccessFetchCards(res)) {
         setCollection(res.cards);
       } else {
@@ -30,7 +32,7 @@ export const Collection = () => {
   if (loading) return <Loading />;
   if (error) return <ErrorMessage>{error}</ErrorMessage>;
   return (
-    <Box align="center" padding="md">
+    <Box vertical wrap justify="start" padding="md" gap="lg">
       {collection.map((card) => (
         <PlayerCard key={card.id} card={card} />
       ))}
